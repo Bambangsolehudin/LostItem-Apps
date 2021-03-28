@@ -13,7 +13,7 @@
                 <div class="card-body">
                       <div class="row">
                           <div class="col-6">
-                              
+                              <br>
                             <div class="form-group">
                                 <label for="name">Name :</label>
                                 {{ $user->name }}
@@ -26,12 +26,19 @@
                                 <label for="nomor">Nomor : </label>
                                 {{ $user->nomor }}
                             </div>
-                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning">edit</a>
+                          
                           </div>
 
-                          <div class="col-6">
-                            <img src="{{ Storage::url($user->image) }}" alt="" style="width: 150px" class="img-thumbnail">    
+                          <div class="col-6" >
+                            <img src="{{ Storage::url($user->image) }}" alt="" style="width: 150px margin-right:0; margin-top:0;" class="img-thumbnail">    
                           </div>
+
+                         
+                      </div>
+                      <hr>
+                      <div class="row justify-content-center">
+                        
+                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning ">Edit</a>
                       </div>
 
 
