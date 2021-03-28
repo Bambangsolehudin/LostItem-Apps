@@ -15,9 +15,8 @@ class CreateAnswerdetailsTable extends Migration
     {
         Schema::create('answerdetails', function (Blueprint $table) {
             $table->id();
-            $table->integer('answer_id');
             $table->integer('user_id');
-            $table->integer('item_id');
+            $table->foreignId('item_id')->constrained('items')->onDelete('cascade');
             $table->timestamps();
         });
     }

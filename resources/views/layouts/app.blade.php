@@ -53,6 +53,9 @@
                             @endif
                         @else
                             <li class="nav-item">
+                                {{-- <a class="nav-link" href="{{ url('home') }}">Dshboard</a> --}}
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ url('barang') }}">Cari Barang</a>
                             </li>
                             <li class="nav-item dropdown">

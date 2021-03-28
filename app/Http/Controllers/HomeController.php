@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use APp\User;
+use App\Item;
+use App\Image;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
+
 {
     /**
      * Create a new controller instance.
@@ -21,8 +26,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // 
     public function index()
     {
-        return view('home');
+        $item = Item::where('user_id', Auth::user()->id)->count();
+        $image = Image::where('user_id', Auth::user()->id)->count();
+        return view('home', compact(['item', 'image']));
     }
 }
