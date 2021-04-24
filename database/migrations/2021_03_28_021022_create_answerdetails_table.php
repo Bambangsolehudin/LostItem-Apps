@@ -17,6 +17,7 @@ class CreateAnswerdetailsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('item_id');
+            $table->string('answer');
             $table->timestamps();
         });
     }
