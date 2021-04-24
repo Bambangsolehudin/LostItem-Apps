@@ -93,7 +93,13 @@ class ItemAllController extends Controller
         //     'answer' => $request->answer
         // ]);
 
-        $answerdetail = Answerdetail::create([
+        // $answerdetail = Answerdetail::create([
+        //     // 'answer_id' => $answer->id,
+        //     'item_id' => $request->item_id,
+        //     'user_id' => Auth::user()->id,
+        //     'answer' => $request->answer
+        // ]);
+        Answerdetail::create([
             // 'answer_id' => $answer->id,
             'item_id' => $request->item_id,
             'user_id' => Auth::user()->id,
