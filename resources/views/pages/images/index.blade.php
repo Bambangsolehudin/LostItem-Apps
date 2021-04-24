@@ -34,7 +34,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td> {{  $item->item->name }} </td>
                             <td>
-                                <img src="{{ Storage::url($item->image) }}" alt="" style="width: 150px" class="img-thumbnail">    
+                                <img src="{{ url('storage/'.$item->image) }}" alt="" style="width: 150px" class="img-thumbnail">    
                             </td>
                             <td>
                                 <a class="btn btn-sm btn-warning" href="{{ route('image.edit', $item->id) }}"> 
