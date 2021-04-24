@@ -38,7 +38,7 @@
                             <label for="name">Jawaban</label>
                             <input name="user_id" type="hidden" class="form-control" id="user_id" value="{{ $item->user_id }}">
                             <input name="item_id" type="hidden" class="form-control" id="item_id" value="{{ $item->id }}">
-                            <input name="answer" type="text" class="form-control" id="answer">
+                            <input name="answer12" type="text" class="form-control" id="answer">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Submit</button>

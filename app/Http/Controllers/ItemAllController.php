@@ -74,7 +74,7 @@ class ItemAllController extends Controller
         Answerdetail::create([
             'item_id' => $request->item_id,
             'user_id' => Auth::user()->id,
-            'answer' => $request->answer
+            'answer' => $request->answer12
         ]);
 
         return redirect()->route('barang');
