@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\item;
+use App\Item;
 use App\User;
 
 class Image extends Model
@@ -15,12 +15,13 @@ class Image extends Model
         'item_id', 'image', 'user_id'
     ];
 
-    public function item(){
-        return $this->belongsTo( Item::class, 'item_id', 'id' );
+    public function item()
+    {
+        return $this->belongsTo(Item::class, 'item_id', 'id');
     }
 
-    public function user(){
-        return $this->belongsTo( User::class, 'users_id', 'id' );
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
-
 }
