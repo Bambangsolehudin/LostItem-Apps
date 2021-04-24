@@ -19,11 +19,12 @@ class ItemController extends Controller
         $this->middleware('auth');
     }
 
+
     public function index()
     {
-        $items = Item::where('user_id', Auth::user()->id)->get();
+        $items = Item::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
 
-        return view('pages.item.index',[
+        return view('pages.item.index', [
             'items' => $items
         ]);
     }
@@ -46,11 +47,19 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'type' => 'required',
+            'category' => 'required',
+            'weight' => 'required|numeric',
+            'detail' => 'required',
+            // 'question' => 'required'
+        ]);
+
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         Item::create($data);
-        return redirect()->route('item.index');
-        
+        return redirect()->route('item.index')->with('status', 'data barang berhasil ditambahkan');
     }
 
     /**
@@ -73,13 +82,12 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = Item::find($id);
-        
+
         return view('pages.item.edit', [
             'item' => $item
         ]);
-
     }
-// 
+    // 
     /**
      * Update the specified resource in storage.
      *
@@ -89,11 +97,19 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'type' => 'required',
+            // 'category' => 'required',
+            'weight' => 'required|numeric',
+            'detail' => 'required',
+            // 'question' => 'required'
+        ]);
+
         $item = Item::find($id);
         $data = $request->all();
         $item->update($data);
-        return redirect()->route('item.index');
-
+        return redirect()->route('item.index')->with('status', 'data berhasil diUpdate');
     }
 
     /**
@@ -106,7 +122,6 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         $item->delete();
-        return redirect()->route('item.index');
-
+        return redirect()->route('item.index')->with('status', 'data berhasil dihapus');
     }
 }

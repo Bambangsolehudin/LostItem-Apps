@@ -17,15 +17,15 @@ class ImageController extends Controller
 
     public function __construct()
     {
-        
-        
+
+
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $items = Image::where('user_id', Auth::user()->id)->get();
-        return view('pages.images.index',[
+        $items = Image::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+        return view('pages.images.index', [
             'items' => $items
         ]);
     }
@@ -39,10 +39,9 @@ class ImageController extends Controller
     {
         $items = Item::where('user_id', Auth::user()->id)->get();
 
-        return view('pages.images.create',[
+        return view('pages.images.create', [
             'items' => $items
         ]);
-
     }
 
     /**
@@ -53,14 +52,20 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            // check validtion for image or file
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:7048',
+        ]);
+
         $data = $request->all();
         $data['user_id'] = Auth::user()->id;
         $data['image'] = $request->file('image')->store(
-            'assets/gallery', 'public'
+            'assets/gallery',
+            'public'
         );
 
         Image::create($data);
-        return redirect()->route('image.index');
+        return redirect()->route('image.index')->with('status', 'data barang berhasil ditambahkan');
     }
 
     /**
@@ -85,7 +90,7 @@ class ImageController extends Controller
         $image = Image::findOrFail($id);
         $item = item::all();
 
-        return view('pages.images.edit',[
+        return view('pages.images.edit', [
             'item' => $item,
             'image' => $image
         ]);
@@ -103,23 +108,21 @@ class ImageController extends Controller
         // $data = $request->all();
 
         // dd($data);
-        
-        if(!$request->file('image')) {
+
+        if (!$request->file('image')) {
             $data = $request->all();
             $image = Image::find($id);
             $image->update($data);
-        
-        }else{
+        } else {
             $data = $request->all();
             $data['image'] = $request->file('image')->store(
-                'assets/gallery', 'public'
+                'assets/gallery',
+                'public'
             );
             $image = Image::find($id);
             $image->update($data);
         }
-        return redirect()->route('image.index');
-     
-  
+        return redirect()->route('image.index')->with('status', 'data barang berhasil diUpdate');
     }
 
     /**
@@ -130,9 +133,8 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        $image=Image::find($id);
+        $image = Image::find($id);
         $image->delete();
-        return redirect()->route('image.index');
-
+        return redirect()->route('image.index')->with('status', 'data barang berhasil dihapus');
     }
 }

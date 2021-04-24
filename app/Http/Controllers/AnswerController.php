@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +23,6 @@ class AnswerController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -58,21 +61,19 @@ class AnswerController extends Controller
     public function answerdetail($id)
     {
         $item = Item::with('answerdetail')->findOrFail($id);
-        return view('pages.answer.detail',[
+        return view('pages.answer.detail', [
             'item' => $item
         ]);
-
     }
 
     public function userdetail($id)
     {
         $user = User::find($id);
-        return view('pages.answer.detailUser',[
+        return view('pages.answer.detailUser', [
             'user' => $user
         ]);
-
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.

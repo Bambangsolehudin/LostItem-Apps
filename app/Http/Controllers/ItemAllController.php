@@ -16,11 +16,16 @@ class ItemAllController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        $items = Item::with('image')->get();
+        $items = Item::with('image')->orderBy('id', 'DESC')->get();
 
-        return view('pages.item-all.index',[
+        return view('pages.item-all.index', [
             'items' => $items
         ]);
     }
@@ -29,7 +34,7 @@ class ItemAllController extends Controller
     {
         $items = Item::with('image')->where('type', 'barang hilang')->get();
 
-        return view('pages.item-all.index',[
+        return view('pages.item-all.index', [
             'items' => $items
         ]);
     }
@@ -38,7 +43,7 @@ class ItemAllController extends Controller
     {
         $items = Item::with('image')->where('type', 'barang temuan')->get();
 
-        return view('pages.item-all.index',[
+        return view('pages.item-all.index', [
             'items' => $items
         ]);
     }
@@ -61,18 +66,17 @@ class ItemAllController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     public function answer(Request $request)
     {
 
         // $post = Post::create([
-    	// 	'title' => $request->title,
-    	// 	'content' => $request->content,
-    	// 	'user_id' => auth()->user()->id,
-    	// 	'thumbnail'=> $request->thumbnail
-    	// ]);
+        // 	'title' => $request->title,
+        // 	'content' => $request->content,
+        // 	'user_id' => auth()->user()->id,
+        // 	'thumbnail'=> $request->thumbnail
+        // ]);
 
         // $data = $request->all();
         // // $data['user_id'] = ;
@@ -80,7 +84,7 @@ class ItemAllController extends Controller
         // $data['nomor'] = Auth::user()->nomor;
 
 
-        
+
         // $answer = Answer::create([
         //     'item_id' => $request->item_id,
         //     'user_id' => $request->user_id,
@@ -107,9 +111,9 @@ class ItemAllController extends Controller
      */
     public function show($id)
     {
-        $item = Item::with('user','image')->find($id);
+        $item = Item::with('user', 'image')->find($id);
         // dd($item);
-        return view('pages.item-all.show',[
+        return view('pages.item-all.show', [
             'item' => $item
         ]);
     }
@@ -147,6 +151,4 @@ class ItemAllController extends Controller
     {
         //
     }
-
-    
 }
