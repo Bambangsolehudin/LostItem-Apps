@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-// use App\Answer;
+
 use Illuminate\Http\Request;
 use App\Item;
-use App\Image;
 use App\Answerdetail;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,7 +93,6 @@ class ItemAllController extends Controller
         // ]);
 
         // $answerdetail = Answerdetail::create([
-        //     // 'answer_id' => $answer->id,
         //     'item_id' => $request->item_id,
         //     'user_id' => Auth::user()->id,
         //     'answer' => $request->answer
