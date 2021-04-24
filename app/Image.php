@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 use App\Item;
 use App\User;
 
@@ -23,5 +24,9 @@ class Image extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
+    }
+    public function getPicturePathAttribute()
+    {
+        return url('') . Storage::url($this->attributes['picturePath']);
     }
 }
