@@ -70,35 +70,8 @@ class ItemAllController extends Controller
     public function answer(Request $request)
     {
 
-        // $post = Post::create([
-        // 	'title' => $request->title,
-        // 	'content' => $request->content,
-        // 	'user_id' => auth()->user()->id,
-        // 	'thumbnail'=> $request->thumbnail
-        // ]);
 
-        // $data = $request->all();
-        // // $data['user_id'] = ;
-        // $data['name'] = Auth::user()->name;
-        // $data['nomor'] = Auth::user()->nomor;
-
-
-
-        // $answer = Answer::create([
-        //     'item_id' => $request->item_id,
-        //     'user_id' => $request->user_id,
-        //     'name' => Auth::user()->name,
-        //     'nomor' => Auth::user()->nomor,
-        //     'answer' => $request->answer
-        // ]);
-
-        // $answerdetail = Answerdetail::create([
-        //     'item_id' => $request->item_id,
-        //     'user_id' => Auth::user()->id,
-        //     'answer' => $request->answer
-        // ]);
         Answerdetail::create([
-            // 'answer_id' => $answer->id,
             'item_id' => $request->item_id,
             'user_id' => Auth::user()->id,
             'answer' => $request->answer
